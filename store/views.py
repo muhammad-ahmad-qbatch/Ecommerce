@@ -1,3 +1,4 @@
+from tkinter import FLAT
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .forms import *
@@ -83,7 +84,6 @@ def products(request, pk):
     else:
         return redirect('login')
 
-
 def checkout(request):
     '''Function that is called when the product is checkout. Returns the checkout information if user is logged in'''
     if request.user.is_authenticated:  
@@ -111,7 +111,6 @@ def checkout2(request, pk):
             
     else:
         return redirect('login')
-
 # @login_required
 def cart(request):
     '''Function to display cart items and information'''
@@ -159,20 +158,27 @@ def sub(request, pk):
     if request.user.is_authenticated:
         product = CartItem.objects.get(product__pk=pk)   
         product.quantity = product.quantity - 1 
-        if product.quantity < 1:
-            product.quantity = 0     
-        product.save()  
+        if product.quantity <= 0:
+            product.quantity = 0 
+            product.delete()
+            messages.error(request, 'Item removed from cart')
+        else:    
+            product.save()  
         return redirect('cart')
     else:
         return redirect('login')
         
 def seller(request):
+    '''Function to display all sellers and their information'''
     tag = []
     sellers = Seller.objects.all()
-    context = {'sellers': sellers, 'id': id}
+    for seller in sellers:
+        tag.append(seller.product_set.values_list('id',flat = True)) 
+    context = {'sellers': sellers, 'id': tag}
     return render(request, 'store/seller.html', context)
 
 def delete_item(request, pk):
+    '''Function to remove an item from the cart'''
     item = CartItem.objects.get(product__pk = pk)
     if request.method == 'GET':
         item.delete()
@@ -181,6 +187,7 @@ def delete_item(request, pk):
     return render(request, 'store/cart.html', context) 
 
 def cart_checkout(request, pk):
+    '''Helper function'''
     buyer = request.user.buyer
     item = Product.objects.get(id = pk)
     order, created = Cart.objects.get_or_create(buyer = buyer, complete = False)

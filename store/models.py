@@ -68,7 +68,6 @@ class Cart(models.Model):
     def get_cart_id(self):
         cartid = self.cartitem_set.get(order = self)
         return cartid.id
-
 class Checkout(models.Model):
     buyer = models.ForeignKey(Buyer, on_delete= models.SET_NULL, blank=True, null=True)
     order = models.ForeignKey(Cart, on_delete= models.SET_NULL, blank=True, null=True)
@@ -80,7 +79,6 @@ class Checkout(models.Model):
 
 class Payment(models.Model):
     pass
-
 class CartItem(models.Model):
     product = models.ForeignKey(Product, on_delete= models.SET_NULL, blank=True, null=True)
     order = models.ForeignKey(Cart, on_delete= models.SET_NULL, null=True)

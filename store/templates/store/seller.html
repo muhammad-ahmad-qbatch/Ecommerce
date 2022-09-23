@@ -8,17 +8,21 @@
 			<div class="box-element product">
 				<h6><strong>{{seller.name}}</strong></h6>
                 <small>{{seller.rating}}</small>
+                {% if seller.tags.first %}
+                <small>{{seller.tags.first.name}}⭐</small>
+                {% else %}
+                <small>{{' '}}</small>
+                {% endif %}
 			</div>
 			<div class="box-element product">
-                <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample{{seller.id}}" role="button" aria-expanded="false" aria-controls="collapseExample{{seller.id}}">
                     View Products
                 </a>
-                <div class="collapse" id="collapseExample">
+                <div class="collapse" id="collapseExample{{seller.id}}">
                     <div class="card card-body">
                        <a  href="{% url 'view-item' seller.id %}"><h6><strong>{{seller.product_set.get}}</strong></h6></a>
                     </div>
-                  </div>
-				
+                </div>
 			</div>
 		</div>
         {% endfor %}
