@@ -1,0 +1,38 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecom site</title>
+</head>
+<body>
+    <body>
+        <div class="row">
+            <img class="img-fluid" alt="Responsive image" src="{{product.imageURL}}">
+            <div class="col-lg-4">
+                <span >
+                    <b>{{tag}}</b>
+                    <br>
+                    <p>Product: {{product.name}}</p>
+                    <p>Price: {{product.price}} $</p>
+                    <p>Seller: {{product.seller}}</p>
+                    <p>Type: {{product.brand}}</p>
+                    <p>Description: {{product.description}}</p>
+                    <p>Items left: {{product.stock}}</p>
+                    <a class="btn btn-success" href="{% url 'checkout2' product.id %}">Buy Item</a>
+                    <a class="btn btn-outline-secondary add-btn" href="{% url 'cart3' product.id %}">Add to cart</a>
+                </span>
+            </div>
+        
+
+        </div>
+    </body>
+</body>
+</html>
+
+{% endblock %}

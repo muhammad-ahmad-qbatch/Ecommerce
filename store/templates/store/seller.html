@@ -1,0 +1,28 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+	<div class="row">
+        {%for seller in sellers %}
+		<div class="col-lg-4">
+			<img class="thumbnail" src="{% static 'images/seller.jpeg' %}">
+			<div class="box-element product">
+				<h6><strong>{{seller.name}}</strong></h6>
+                <small>{{seller.rating}}</small>
+			</div>
+			<div class="box-element product">
+                <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    View Products
+                </a>
+                <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+                       <a  href="{% url 'view-item' seller.id %}"><h6><strong>{{seller.product_set.get}}</strong></h6></a>
+                    </div>
+                  </div>
+				
+			</div>
+		</div>
+        {% endfor %}
+    </div>
+            
+{% endblock content %}
+
