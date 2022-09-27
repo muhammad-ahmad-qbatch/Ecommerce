@@ -127,7 +127,7 @@ def cart2(request, pk):
     '''Function that increases cart items count and returns a list of cart items'''
     if request.user.is_authenticated:
         cart_checkout(request, pk)
-        return redirect('http://127.0.0.1:8000/')
+        return redirect('home')
     else:
        return redirect('login')
    
@@ -166,7 +166,7 @@ def sub(request, pk):
             product.save()  
         return redirect('cart')
     else:
-        return redirect('login')
+        return redirect('login') 
         
 def seller(request):
     '''Function to display all sellers and their information'''
