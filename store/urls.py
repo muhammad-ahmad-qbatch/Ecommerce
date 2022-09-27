@@ -7,6 +7,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('login/',views.loginUser, name='login'),
+    path('register/',views.registerUser, name='register'),
     path('logout/',views.logoutUser, name='logout'),
     path('admin/', admin.site.urls),
     path('', views.Home.as_view(), name='home'),
@@ -20,5 +21,4 @@ urlpatterns = [
     path('/checkout/', views.checkout, name='checkout'),
     path('/checkout/<slug:pk>', views.checkout2, name='checkout2'),
     path('delete/<slug:pk>/',views.delete_item, name = 'delete'), 
-
 ]

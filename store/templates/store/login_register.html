@@ -9,7 +9,20 @@
 <div class="container">
 	<div class="screen">
 		<div class="screen__content">
-
+		{% if page == 'register' %}
+			<h1>Register Account</h1>
+			<form class="register" action="{% url 'register' %}" method="post">
+                {% csrf_token %}
+				<div class="login__field">
+                    <span class="material-icons">
+                        lock
+                    </span>
+					{{form.as_p}}
+				</div>
+				<input type="submit" value="Register User" />
+			</form>
+			<p>Already have an account? <a href = '{% url "login" %}'>Sign in</a></p>
+		{% else %}
 			<form class="login" action="{% url 'login' %}" method="post">
                 {% csrf_token %}
 				<div class="login__field">
@@ -23,12 +36,16 @@
                         lock
                     </span>
 					<input type="password" class="login__input" name = "password" placeholder="Password">
-				</div>
-				<button type="submit" class="button login__submit">
-					<span class="button__text">Log In Now</span>
-					<i class="button__icon fas fa-chevron-right"></i>
-							
+					<button type="submit" class="button login__submit">
+						<span class="button__text">Log In Now</span>
+						<i class="button__icon fas fa-chevron-right"></i>	
+				</div>	
 			</form>
+				<br>
+				<div class='text-center'>
+					<p>Don't have an account? <a href = '{% url "register" %}'>Sign up</a></p>
+				</div>
+		{% endif %}
 		</div>
 		<div class="screen__background">
 			<span class="screen__background__shape screen__background__shape4"></span>

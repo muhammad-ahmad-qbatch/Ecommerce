@@ -34,7 +34,7 @@ SECRET_KEY = 'django-insecure-7keroe5q*92c%5ewjyxmw9obply_6ev_wc08%akca7wa9_l6q3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ecommerce-store-qbatch.herokuapp.com',]
+ALLOWED_HOSTS = ['ecommerce-store-qbatch.herokuapp.com','127.0.0.1','localhost',]
 
 
 # Application definition
@@ -57,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'ecommerce.urls'
@@ -124,7 +125,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
             BASE_DIR / 'static',
                     ]

@@ -16,7 +16,7 @@ from django.contrib.auth.decorators import login_required
 
 def loginUser(request):
     '''Function to login a user'''
-    
+    page = 'login'
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -32,7 +32,8 @@ def loginUser(request):
             return redirect('home')
         else:
             print('Invalid credentials')
-    return render(request, 'store/login_register.html')
+    context = {'page': page}
+    return render(request, 'store/login_register.html',context)
         
 def logoutUser(request):
     '''Function to log out a user'''
@@ -53,14 +54,14 @@ def registerUser(request):
             messages.success(request, 'User account was created!')
 
             login(request, user)
-            return redirect('edit-account')
+            return redirect('login')
 
         else:
             messages.success(
                 request, 'An error has occurred during registration')
 
     context = {'page': page, 'form': form}
-    return render(request, 'users/login_register.html', context)
+    return render(request, 'store/login_register.html', context)
 
 class Home(ListView):
     '''A class-based list view that displays a list of products on the homepage'''
