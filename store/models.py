@@ -2,12 +2,16 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericRelation, GenericForeignKey
+from django.contrib.auth.models import AbstractUser
 
 
+class UserType(models.Model):
+    name = models.CharField(max_length = 10, default = None, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
 class Buyer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=50)
-    email = models.EmailField(max_length= 254, null=True, blank=True)
+    # email = models.EmailField(max_length= 254, null=True, blank=True)
     password = models.CharField(max_length=50)
     def __str__(self):
         return self.name

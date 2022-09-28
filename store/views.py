@@ -34,7 +34,7 @@ def loginUser(request):
             print('Invalid credentials')
     context = {'page': page}
     return render(request, 'store/login_register.html',context)
-        
+         
 def logoutUser(request):
     '''Function to log out a user'''
     logout(request)
@@ -50,17 +50,15 @@ def registerUser(request):
             user = form.save(commit=False)
             user.username = user.username.lower()
             user.save()
-
             messages.success(request, 'User account was created!')
-
             login(request, user)
             return redirect('login')
 
         else:
-            messages.success(
-                request, 'An error has occurred during registration')
-
-    context = {'page': page, 'form': form}
+            messages.success(request, 'An error has occurred during registration')
+    user = UserType.objects.all()
+    print(user)
+    context = {'page': page, 'form': form, 'user': user}
     return render(request, 'store/login_register.html', context)
 
 class Home(ListView):

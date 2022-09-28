@@ -5,23 +5,40 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
 
 {% block content %}
-
+{% include 'store/messages.html' %}
 <div class="container">
 	<div class="screen">
 		<div class="screen__content">
 		{% if page == 'register' %}
-			<h1>Register Account</h1>
+			<h1 style = 'text-align: center;'>Register Account</h1>
 			<form class="register" action="{% url 'register' %}" method="post">
                 {% csrf_token %}
-				<div class="login__field">
-                    <span class="material-icons">
-                        lock
-                    </span>
-					{{form.as_p}}
+				<div class="login__field" style = 'text-align: center;'>
+					<input type="text" class="login__input" name = "first_name" placeholder="Full name">
+					<input type="text" class="login__input" name = "username" placeholder="Username">
+					<input type="text" class="login__input" name = "email" placeholder="Email">
+					<input type="password" class="login__input" name = "password1" placeholder="Password">
+					<input type="password" class="login__input" name = "password2" placeholder="Confirm Password">
+					<br>
+					You are?
+					{% for user in user %}
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+						<label class="form-check-label" for="flexRadioDefault1">
+						  <b>{{ user.name }}</b>
+						</label>
+					</div>
+					{% endfor %}
+					 
+					
+
 				</div>
-				<input type="submit" value="Register User" />
+				<div class="col text-center">
+					<input class="btn btn-default" type="submit" value="Register User" />
+				</div>
 			</form>
-			<p>Already have an account? <a href = '{% url "login" %}'>Sign in</a></p>
+			<br><br><br>
+			<p style = 'text-align: center;'><b>Already have an account? <a href = '{% url "login" %}'>Sign in</a></b></p>
 		{% else %}
 			<form class="login" action="{% url 'login' %}" method="post">
                 {% csrf_token %}
@@ -43,7 +60,7 @@
 			</form>
 				<br>
 				<div class='text-center'>
-					<p>Don't have an account? <a href = '{% url "register" %}'>Sign up</a></p>
+					<p><b>Don't have an account? <a href = '{% url "register" %}'>Sign up</a></b></p>
 				</div>
 		{% endif %}
 		</div>

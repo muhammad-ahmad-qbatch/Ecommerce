@@ -85,6 +85,7 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -151,3 +152,4 @@ MESSAGE_TAGS = {
     messages.ERROR: 'alert-danger',
     
 }
+# AUTH_USER_MODEL = 'store.User'

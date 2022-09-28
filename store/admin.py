@@ -7,6 +7,7 @@ admin.site.register(Seller)
 admin.site.register(Cart)
 admin.site.register(CartItem)
 admin.site.register(Checkout)
+admin.site.register(UserType)
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
